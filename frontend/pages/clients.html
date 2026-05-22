@@ -22,45 +22,36 @@
         <p>customer</p>
         <p>package</p>
         <p>monthly price</p>
+        <p>action</p>
       </span>
 
-      <span class="client-row">
-        <p>Pizza America</p>
-        <p>Home 300</p>
-        <p>$109.90</p>
-      </span>
-
-      <span class="client-row">
-        <p>Southern Garage Ltd</p>
-        <p>Business 600</p>
-        <p>$159.90</p>
-      </span>
-
-      <span class="client-row">
-        <p>Blue Market Cafe</p>
-        <p>Starter 100</p>
-        <p>$79.90</p>
-      </span>
-
-      <span class="client-row">
-        <p>TechVision Office</p>
-        <p>Fiber Pro 1000</p>
-        <p>$219.90</p>
-      </span>
-
-        <span class="client-row">
-        <p>Castro</p>
-        <p>Fiber Pro 1000</p>
-        <p>$219.90</p>
-      </span>
-
-        <span class="client-row">
-        <p>KSP</p>
-        <p>Fiber Pro 1000</p>
-        <p>$219.90</p>
-      </span>
     </div>
 
-    <script src="../functions/main.js"></script>
+    <button id="add-customer-btn" class="add-customer-btn">Add New Customer</button>
+
+    <div id="customer-modal" class="modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <h2>Add New Customer</h2>
+        <form id="customer-form">
+          <div class="form-group">
+            <label for="customer-name">Customer Name</label>
+            <input type="text" id="customer-name" name="customer-name" required />
+          </div>
+          <div class="form-group">
+            <label for="package-select">Package</label>
+            <select id="package-select" name="package-select" required>
+              <option value="">Select a package</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="cancel-btn" class="btn-cancel">Cancel</button>
+            <button type="submit" id="create-btn" class="btn-create">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="../scripts/clients.js"></script>
   </body>
 </html>

@@ -28,3 +28,7 @@ class GetPackageDTO(BaseModel):
     upload_speed: int
     monthly_price: float
 
+class CreateCustomerDTO(BaseModel):
+    package_id: int
+    customer_name: str
+

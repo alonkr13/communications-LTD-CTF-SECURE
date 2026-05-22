@@ -5,27 +5,6 @@ from database.connection import connection, cursor
 def login_service(user: LoginDTO):
 
 
-
-    try:
-        cursor.execute(
-            f"""
-            select username FROM users WHERE username = '{user.username}'
-            """
-        )
-        
-
-        existing_user = cursor.fetchone()
-
-        if existing_user == None:
-            raise Exception("Username does not exist")
-        
-    except Exception as e:
-        return{
-            "message": str(e)
-            }
-
-
-
     try:
         cursor.execute(
             f"""
@@ -37,7 +16,7 @@ def login_service(user: LoginDTO):
         
         if existing_user == None:
 
-            raise Exception("Wrong password")
+            raise Exception("Wrong username or password")
 
     except Exception as e:
         return {

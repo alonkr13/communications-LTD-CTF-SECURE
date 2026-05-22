@@ -16,6 +16,10 @@ loginButton.addEventListener("click", async (event) => {
   arrayOfPackages.push(data.packages);
   arrayOfCustomers.push(data.customers);
 
+  /* Using sessionStorage to store customer and package data,
+      if not data will be lost */
+  sessionStorage.setItem("customers", JSON.stringify(data.customers));
+  sessionStorage.setItem("packages", JSON.stringify(data.packages));
+  window.location.href = "clients.html";
+
 });
-
-
