@@ -3,9 +3,10 @@ from database.connection import connection, cursor
 def delete_package_service(customer_name: str):
     try:
         cursor.execute(
-            f"""
-            DELETE FROM customers WHERE customer_name = '{customer_name}'
             """
+            DELETE FROM customers WHERE customer_name = ?
+            """,
+            (customer_name,)
         )
         connection.commit()
 

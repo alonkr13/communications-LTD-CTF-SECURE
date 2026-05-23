@@ -16,7 +16,7 @@ export const LoginRequest = async (data) => {
 
     const result = await response.json();
     console.log("results are: ", result);
-    return result.data;
+    return result;
   } catch (error) {
     console.error("Error:", error);
   }

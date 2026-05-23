@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from auth.services.registrationService import registration_service
 from auth.services.loginService import login_service
 from auth.services.forgotPasswordService import forgot_password_service
@@ -20,9 +20,9 @@ def register_user(user: RegisterDTO):
 
 
 @router.post("/login")
-def login_user(user: LoginDTO):
+def login_user(request: Request, user: LoginDTO):
     try:
-        return login_service(user)
+        return login_service(user, request.client.host)
     except Exception as e:
         return {"message": "error thrown from login service"}
 

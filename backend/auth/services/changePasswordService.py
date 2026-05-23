@@ -5,9 +5,10 @@ from database.connection import connection, cursor
 def change_password_service(user: ChangePasswordDTO):
     try:
         cursor.execute(
-            f"""
-            select username, password FROM users WHERE username = '{user.username}'
             """
+            select username, password FROM users WHERE username = ?
+            """,
+            (user.username,)
         )
         existing_user = cursor.fetchone()
 
@@ -22,11 +23,12 @@ def change_password_service(user: ChangePasswordDTO):
 
     try:
         cursor.execute(
-            f"""
-            update users
-            set password = '{user.new_password}'
-            where username = '{user.username}'
             """
+            update users
+            set password = ?
+            where username = ?
+            """,
+            (user.new_password, user.username)
         )
         connection.commit()
 

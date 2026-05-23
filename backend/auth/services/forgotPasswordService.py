@@ -28,9 +28,10 @@ def reset_password(user: ForgotPasswordDTO):
     
         try:
             cursor.execute(
-                f"""
-                select email FROM users WHERE email = '{user.email}' 
                 """
+                select email FROM users WHERE email = ?
+                """,
+                (user.email,)
             )
 
             existing_user = cursor.fetchone()

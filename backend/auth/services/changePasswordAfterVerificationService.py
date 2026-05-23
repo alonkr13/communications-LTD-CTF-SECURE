@@ -7,10 +7,10 @@ def change_password_service_after_verification_service(user: ChangePasswordAVDTO
         cursor.execute(
             f"""
             update users
-            set password = '{user.new_password}'
-            where username = '{user.username}'
+            set password = ?
+            where username = ?
             """
-        )
+        , (user.new_password, user.username))
         connection.commit()
 
         return {"message": "Password changed successfully"}

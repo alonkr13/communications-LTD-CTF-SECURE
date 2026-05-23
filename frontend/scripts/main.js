@@ -11,15 +11,19 @@ loginButton.addEventListener("click", async (event) => {
   const user = userInput.value;
   const pass = passwordInput.value;
 
-  const data = await LoginRequest({ username: user, password: pass });
-  console.log(`data is ${data}`)
-  arrayOfPackages.push(data.packages);
-  arrayOfCustomers.push(data.customers);
+  const result = await LoginRequest({ username: user, password: pass });
+
+  if (!result || !result.data) {
+    alert(result?.message || "Login failed. Please try again.");
+    return;
+  }
+
+  arrayOfPackages.push(result.data.packages);
+  arrayOfCustomers.push(result.data.customers);
 
   /* Using sessionStorage to store customer and package data,
       if not data will be lost */
-  sessionStorage.setItem("customers", JSON.stringify(data.customers));
-  sessionStorage.setItem("packages", JSON.stringify(data.packages));
+  sessionStorage.setItem("customers", JSON.stringify(result.data.customers));
+  sessionStorage.setItem("packages", JSON.stringify(result.data.packages));
   window.location.href = "clients.html";
-
 });

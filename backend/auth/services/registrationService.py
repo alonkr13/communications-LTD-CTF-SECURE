@@ -6,10 +6,11 @@ from database.connection import connection, cursor
 def registration_service(user: RegisterDTO):
     try:
         cursor.execute(
-            f"""
-            INSERT INTO users (username, email, password)
-            VALUES ('{user.username}', '{user.email}', '{user.password}')
             """
+            INSERT INTO users (username, email, password)
+            VALUES (?, ?, ?)
+            """,
+            (user.username, user.email, user.password)
         )
         
         connection.commit()
