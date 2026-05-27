@@ -2,7 +2,7 @@ import sqlite3
 from datetime import datetime, timedelta
 from auth.dtos.dtos import LoginDTO
 from database.connection import connection, cursor
-
+from sendEmail import send_verification_email
 MAX_ATTEMPTS = 5
 LOCKOUT_MINUTES = 15
 
@@ -15,6 +15,14 @@ def login_service(user: LoginDTO, ip: str):
     if attempt_row:
         failed_count, last_failed_str = attempt_row
         last_failed = datetime.fromisoformat(last_failed_str)
+        if failed_count >= 3:
+            userEmail = cursor.execute(
+                """
+                SELECT email FROM users WHERE username = ?
+                """
+            )(user.username)
+            send_verification_email(userEmail)
+
         if failed_count >= MAX_ATTEMPTS and datetime.now() - last_failed < timedelta(minutes=LOCKOUT_MINUTES):
             remaining = LOCKOUT_MINUTES - int((datetime.now() - last_failed).total_seconds() // 60)
             return {"message": f"Too many failed attempts. Try again in {remaining} minute(s)."}
