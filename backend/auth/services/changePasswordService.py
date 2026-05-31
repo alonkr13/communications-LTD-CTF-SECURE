@@ -1,8 +1,12 @@
 from auth.dtos.dtos import ChangePasswordDTO
+from auth.services.passwordBlacklist import is_blacklisted
 from database.connection import connection, cursor
 
 
 def change_password_service(user: ChangePasswordDTO):
+    if is_blacklisted(user.new_password):
+        return {"message": "Password is too common, please choose a stronger one."}
+
     try:
         cursor.execute(
             """

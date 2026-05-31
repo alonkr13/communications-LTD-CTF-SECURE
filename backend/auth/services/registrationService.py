@@ -1,9 +1,13 @@
 from fastapi import HTTPException, status
 import sqlite3
 from auth.dtos.dtos import RegisterDTO
+from auth.services.passwordBlacklist import is_blacklisted
 from database.connection import connection, cursor
 
 def registration_service(user: RegisterDTO):
+    if is_blacklisted(user.password):
+        return {"message": "Password is too common, please choose a stronger one."}
+
     try:
         cursor.execute(
             """
