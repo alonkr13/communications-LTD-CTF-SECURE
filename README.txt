@@ -1,6 +1,6 @@
 First-Time Setup Summary
 
-git clone https://github.com/AdamFinkler/communications-LTD-CTF.git
+git clone https://github.com/alonkr13/communications-LTD-CTF-SECURE.git
 cd communications-LTD-CTF
 cd backend
 python -m venv venv
