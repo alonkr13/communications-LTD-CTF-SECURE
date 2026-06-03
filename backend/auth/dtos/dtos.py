@@ -10,6 +10,7 @@ class RegisterDTO(BaseModel):
 class LoginDTO(BaseModel):
     username: str
     password: str
+    code: Optional[str] = None
 
 class ChangePasswordDTO(BaseModel):
     username: str

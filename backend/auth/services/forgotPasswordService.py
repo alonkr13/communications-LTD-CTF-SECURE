@@ -1,7 +1,7 @@
 import sqlite3
 import hmac
 from auth.dtos.dtos import ForgotPasswordDTO
-from database.connection import connection, cursor
+from database.connection import cursor
 import hashlib
 import smtplib
 from email.message import EmailMessage
