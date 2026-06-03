@@ -4,6 +4,7 @@ import { arrayOfCustomers, arrayOfPackages } from "./global-data.js";
 const loginButton = document.querySelector("#login-button");
 const userInput = document.querySelector("#user-input");
 const passwordInput = document.querySelector("#password-input");
+const loginError = document.querySelector("#login-error");
 
 loginButton.addEventListener("click", async (event) => {
   event.preventDefault();
@@ -14,9 +15,12 @@ loginButton.addEventListener("click", async (event) => {
   const result = await LoginRequest({ username: user, password: pass });
 
   if (!result || !result.data) {
-    alert(result?.message || "Login failed. Please try again.");
+    loginError.textContent = result?.message || "Login failed. Please try again.";
+    loginError.style.display = "block";
     return;
   }
+
+  loginError.style.display = "none";
 
   arrayOfPackages.push(result.data.packages);
   arrayOfCustomers.push(result.data.customers);
