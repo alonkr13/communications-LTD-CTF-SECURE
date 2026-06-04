@@ -92,6 +92,10 @@ const handleCreateCustomer = async (e) => {
 
   if (result.message.includes("successfully")) {
     const storedName = result.customer_name;
+    if (!storedName) {
+      alert("Error: unexpected server response");
+      return;
+    }
     customers.push([packageId, storedName]);
     sessionStorage.setItem("customers", JSON.stringify(customers));
     renderCustomerRow(packageId, storedName);
@@ -105,7 +109,7 @@ const handleCreateCustomer = async (e) => {
 const attachDeleteListener = (btn, customerRow) => {
   btn.addEventListener("click", (e) => {
     const customerName = e.target.getAttribute("data-customer");
-    if (confirm(`Are you sure you want to delete ${customerName}?`)) {
+    if (confirm(`Are you sure you want to delete ${decodeHtml(customerName)}?`)) {
       handleDelete(customerName, customerRow);
     }
   });
