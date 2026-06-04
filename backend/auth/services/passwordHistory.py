@@ -21,10 +21,6 @@ if config is None:
 HISTORY_COUNT = int(config.get("password_history_counter",False))
 
 def password_in_history(username: str, new_password: str):
-    """
-    Return True if the new password matches one of the user's
-    last history_count passwords.
-    """
 
     cursor.execute(
         """
